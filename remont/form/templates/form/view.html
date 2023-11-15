@@ -1,5 +1,8 @@
+{% extends "form/base.html" %}
+{%block content%}
 <ul>
 {% for i in rows %}
     <li>{{i.info}} - {{i.amount}} </li>
 {% endfor %}
 </ul>
+{%endblock%}

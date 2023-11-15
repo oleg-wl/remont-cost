@@ -1,0 +1,27 @@
+{% block head %}
+<!DOCTYPE html>
+<head>
+    {%load static%}
+    <link rel="stylesheet" href="{% static "form/style.css" %}">
+    {%block title%}
+    {% endblock %}
+</head>
+{% endblock %}
+{%block page%}
+<body>
+    {%block menu%}
+    <ul class="menu-bar">
+        <li>
+        <li><a href={%url 'form:index'%}>Главная</a></li>
+        <li><a href=''>Добавить</a></li>
+        <li><a href={%url 'form:view'%}>Показать список расходов</a></li>
+        <li><a href=''>Скачать таблицу</a></li>
+    </ul>
+    {% endblock %}
+    {%block content%}
+    {%endblock%}
+{%endblock%}
+    
+{%block footer%}
+{%endblock%}
+</body>

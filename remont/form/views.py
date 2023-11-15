@@ -8,10 +8,10 @@ from .models import Purchases, Types
 # Create your views here.
 
 class index(TemplateView):
-    template_name = 'index.html'
+    template_name = 'form/index.html'
 
 class Purch_view(ListView):
-    template_name = 'view.html'
+    template_name = 'form/view.html'
     context_object_name = 'rows'
     
     def get_queryset(self):
