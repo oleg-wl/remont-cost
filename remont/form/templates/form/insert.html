@@ -1,0 +1,10 @@
+{%extends "form/base.html" %}
+
+{% block content %}
+<form action="some_url" method="post">
+    {% csrf_token %}
+    {% for t in types_all  %}
+        <input type="radio" id="t{{ forloop.counter }}" value="{{ t.id }}" name = 'b'>
+        <label for="t{{ forloop.counter }}">{{ t.type_name}}</label><br>
+    {% endfor %}
+{% endblock %}
