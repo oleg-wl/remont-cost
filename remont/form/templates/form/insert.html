@@ -1,10 +1,22 @@
 {%extends "form/base.html" %}
 
 {% block content %}
-<form action="some_url" method="post">
+{% if message %}
+    <p style="color:red"> {{ message }} </p>
+<form action={% url "form:add" %} method="post">
     {% csrf_token %}
     {% for t in types_all  %}
         <input type="radio" id="t{{ forloop.counter }}" value="{{ t.id }}" name = 'b'>
         <label for="t{{ forloop.counter }}">{{ t.type_name}}</label><br>
     {% endfor %}
+    <input type="text" id="info" name="info">
+    <label for="info">Описание</label><br>
+    <input type="text" id="amount" name="amount">
+    <label for="info">Сумма</label><br>
+
+    <input type="date" id="date" name="date" min="2023-10-01"/>
+    <label for="date">Дата</label><br>
+    <input type="submit" value="Добавить"/>
+
+
 {% endblock %}
