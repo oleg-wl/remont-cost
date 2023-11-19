@@ -1,8 +1,10 @@
+from shlex import join
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView, DetailView, View
 
+from pydantic import ValidationError
 from .models import Purchases, Types
 from .schemas import PurchaseValidation
 
@@ -49,9 +51,13 @@ def add(request):
         add = Purchases(
         day=data.date, amount=data.amount, info=data.info, types=Types.objects.get(pk=data.type_id)
     )
-        add.save()
         request.session['message'] = "Запись добавлена успешно"
+        add.save()
     
+    except ValidationError as valerr:
+        errlist = [e.get('msg') for e in valerr.errors()]
+        request.session['message'] = ' ,'.join(errlist)
+
     except Exception as e:
         request.session['message'] = "Ошибка добавления записи"
         print(e)
