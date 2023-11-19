@@ -1,6 +1,10 @@
-{% block head %}
 <!DOCTYPE html>
+<html lang='ru'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
 <head>
+    <meta charset="utf-8">
     {%load static%}
     <link rel="stylesheet" href="{% static "form/style.css" %}">
     {%block title%}
@@ -9,19 +13,19 @@
 {% endblock %}
 {%block page%}
 <body>
+    <div class = "container">
     {%block menu%}
-    <ul class="menu-bar">
-        <li>
-        <li><a href={%url 'form:index'%}>Главная</a></li>
-        <li><a href={% url 'form:insert' %}>Добавить</a></li>
-        <li><a href={%url 'form:view'%}>Показать список расходов</a></li>
-        <li><a href=''>Скачать таблицу</a></li>
+    <ul class="menu-bar container p-5 my-5 bg-dark list-inline">
+        <li class="list-inline-item"><a href={%url 'form:index'%}>Главная</a></li>
+        <li class="list-inline-item"><a href={% url 'form:insert' %}>Добавить</a></li>
+        <li class="list-inline-item"><a href={%url 'form:view'%}>Показать список расходов</a></li>
+        <li class="list-inline-item"><a href=''>Скачать таблицу</a></li>
     </ul>
     {% endblock %}
     {%block content%}
     {%endblock%}
 {%endblock%}
-    
 {%block footer%}
 {%endblock%}
 </body>
+</html>

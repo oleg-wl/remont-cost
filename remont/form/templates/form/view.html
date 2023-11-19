@@ -1,10 +1,11 @@
 {% extends "form/base.html" %}
-{%block content%}
+{% block content %}
+<div class="list-group-flush">
 <ul>
 {% for i in rows %}
-    <li>Добавлено: {{ i.day }}: {{i.info}}, Сумма {{i.amount}}  <a href="">Удалить</a></li>
+    <li class="list-unstyled">Добавлено: {{ i.day.date }}: {{i.info}}, Сумма {{i.amount}}  <a href="">Удалить</a></li>
 {% endfor %}
-<p> Всего: {{ total }} </p>
-
+<p><b> Всего: {{ total }} </b></p>
+</div>
 </ul>
 {%endblock%}
