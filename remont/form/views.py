@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.generic import TemplateView, ListView, DetailView, View
 
 from .models import Purchases, Types
+from .schemas import PurchaseValidation
 
 
 class index(TemplateView):
@@ -19,7 +20,7 @@ class Purch_view(ListView):
 
 
 def view(request):
-    q = Purchases.objects.all()
+    q = Purchases.objects.order_by('-day')
     total_sum = sum(q.values_list("amount", flat=True))
 
     return render(request, "form/view.html", context={"rows": q, "total": total_sum})
@@ -27,21 +28,32 @@ def view(request):
 
 def insert(request):
     t = Types.objects.all()
-    return render(request, "form/insert.html", context={"types_all": t})
+
+    message = request.session.get('message', False)
+    if message: del(request.session['message'])
+
+
+    return render(request, "form/insert.html", context={"types_all": t,
+                                                        'message':message})
 
 
 def add(request):
+
     type_id = request.POST["b"]
     info = request.POST["info"]
     date = request.POST["date"]
     amount = request.POST["amount"]
     
     try:
+        data = PurchaseValidation(type_id=type_id, info=info, date=date, amount=amount)
         add = Purchases(
-        day=date, amount=amount, info=info, types=Types.objects.get(pk=type_id)
+        day=data.date, amount=data.amount, info=data.info, types=Types.objects.get(pk=data.type_id)
     )
         add.save()
-        message = "Запись добавлена успешно"
+        request.session['message'] = "Запись добавлена успешно"
     
-    except:
-        message = "Ошибка добавления записи"
+    except Exception as e:
+        request.session['message'] = "Ошибка добавления записи"
+        print(e)
+
+    return redirect('/insert')

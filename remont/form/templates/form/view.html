@@ -2,7 +2,7 @@
 {%block content%}
 <ul>
 {% for i in rows %}
-    <li>Добавлено: {{ i.day }}: {{i.info}}, Сумма {{i.amount}} </li>
+    <li>Добавлено: {{ i.day }}: {{i.info}}, Сумма {{i.amount}}  <a href="">Удалить</a></li>
 {% endfor %}
 <p> Всего: {{ total }} </p>
 
