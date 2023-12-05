@@ -3,9 +3,9 @@
 <div class="list-group-flush">
 <ul>
 {% for i in rows %}
-    <li class="list-unstyled">Добавлено: {{ i.day.date }}: {{i.info}}, Сумма {{i.amount}}  <a href="">Удалить</a></li>
+    <li class="list-unstyled">Date:  {{ i.day.date }} - {{i.info}}, amount {{i.amount}} type: {{i.types.type_name}}  <a href="">Удалить</a></li>
 {% endfor %}
-<p><b> Всего: {{ total }} </b></p>
 </div>
 </ul>
+{{ total_sum }}
 {%endblock%}
