@@ -13,6 +13,8 @@ from .schemas import PurchaseValidation
 from .forms import InputForm
 from django.db.models import Sum
 
+from .pivot import create_table
+
 class InputView(View):
     def get(self, request):
         message = request.session.get('message', False)
@@ -58,26 +60,8 @@ class PurchaisesDeleteView(DeleteView):
     fiedls = '__all__'
     
 
-def view(request):
-    q = Purchases.objects.order_by('-day')
-    total_sum = sum(q.values_list("amount", flat=True))
+def table(request):
 
-    return render(request, "form/view.html", context={"rows": q, "total": total_sum})
-
-
-def insert(request):
-    t = Types.objects.all()
-
-    message = request.session.get('message', False)
-    if message: del(request.session['message'])
-
-
-    return render(request, "form/insert.html", context={"types_all": t,
-                                                        'message':message})
-
-
-def add(request):
-    pass
-
-def delete(request):
-    pass
+    table = create_table()
+    
+    return render(request=request, template_name='form/table.html', context={'table':table})

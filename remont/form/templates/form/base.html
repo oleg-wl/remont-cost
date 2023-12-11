@@ -18,8 +18,8 @@
     <ul class="menu-bar container p-5 my-5 bg-dark list-inline">
         <li class="list-inline-item"><a href={%url 'form:index'%}>Главная</a></li>
         <li class="list-inline-item"><a href={% url 'form:insert' %}>Добавить</a></li>
-        <li class="list-inline-item"><a href={%url 'form:view'%}>Показать список расходов</a></li>
-        <li class="list-inline-item"><a href=''>Скачать таблицу</a></li>
+        <li class="list-inline-item"><a href={%url 'form:view' %}>Показать список расходов</a></li>
+        <li class="list-inline-item"><a href={% url 'form:table' %}> Показать сводную таблицу</a></li>
     </ul>
     {% endblock %}
     {%block content%}
