@@ -1,0 +1,15 @@
+{% extends "form/base.html" %}
+{% block content %}
+<div class="list-group-flush">
+<ul>
+    {% if rows %}
+        {% for i in rows %}
+            <li class="list-unstyled"><a href="{% url 'form:detail' i.id %}">{{ i.info }}</a> || <a href="{% url 'form:delete' i.id  %}">Удалить</a></li>
+            Всего потратили: {{ total_sum }}
+        {% endfor %}
+    {% else %}
+        <p> Список покупок пуст </p>
+    {% endif %} 
+</div>
+</ul>
+{%endblock%}

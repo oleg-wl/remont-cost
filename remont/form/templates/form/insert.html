@@ -1,0 +1,15 @@
+{%extends "form/base.html" %}
+
+{% block content %}
+
+{% if message %} <p> {{ message }} </p> {% endif %}
+
+<form action={% url "form:insert" %} method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Добавить"/>
+
+
+{% endblock %}
