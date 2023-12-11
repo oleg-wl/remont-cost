@@ -2,10 +2,14 @@
 {% block content %}
 <div class="list-group-flush">
 <ul>
-{% for i in rows %}
-    <li class="list-unstyled">Date:  {{ i.day.date }} - {{i.info}}, amount {{i.amount}} type: {{i.types.type_name}}  <a href="">Удалить</a></li>
-{% endfor %}
+    {% if rows %}
+        {% for i in rows %}
+            <li class="list-unstyled"><a href="{% url 'form:detail' i.id %}">{{ i.info }}</a> || <a href="{% url 'form:delete' i.id  %}">Удалить</a></li>
+            Всего потратили: {{ total_sum }}
+        {% endfor %}
+    {% else %}
+        <p> Список покупок пуст </p>
+    {% endif %} 
 </div>
 </ul>
-{{ total_sum }}
 {%endblock%}

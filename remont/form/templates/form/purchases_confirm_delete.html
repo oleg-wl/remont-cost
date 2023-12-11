@@ -1,0 +1,15 @@
+{% extends "form/base.html" %}
+
+{% block content %}
+
+<h1>Delete mark</h1>
+
+<p>Are you sure you want to delete the mark: {{ purchases }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+  <input type="submit" onclick="window.location='{% url 'form:view' %}' ; return false;" value="Cancel">
+</form>
+
+{% endblock %}

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
 
 from django.views.generic import TemplateView, ListView, DetailView, View
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from pydantic import ValidationError
 
@@ -47,6 +49,14 @@ class PurchaisesListView(ListView):
         context['total_sum'] = Purchases.objects.all().aggregate(sum_all=Sum('amount')).get('sum_all')
         return context
 
+class PurchaisesDetailedView(DetailView):
+    model = Purchases
+
+class PurchaisesDeleteView(DeleteView):
+    model = Purchases
+    success_url = reverse_lazy('form:view')
+    fiedls = '__all__'
+    
 
 def view(request):
     q = Purchases.objects.order_by('-day')
